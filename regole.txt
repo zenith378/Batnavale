@@ -1,0 +1,113 @@
+
+
+
+
+
+
+
+
+
+
+
+
+Benvenuto a battaglia navale!
+Il gioco prevede lo scontro fra due flotte di navi: la tua e quella del computer.
+
+Il numero delle navi e la dimensione della griglia è la stessa per entrambi: di default si gioca su una griglia 8x8 con una nave da 1, due navi da 2 e tre navi da 3 a testa. A scelta si può decidere il numero di navi e la dimensione della griglia. 
+
+Le navi si possono disporre in orizzontale o in verticale, ma non possono essere adiacenti in nessuna direzione (compresa la diagonale). 
+
+Di default le navi vengono disposte in ordine casuale, ma si può scegliere di giocare inserendole manualmente. L’inserimento prevede di piazzare per prime le navi da tre, poi da due e infine da uno.
+
+Per posizionare una nave si decide la casella in cui posizionarle e poi la direzione (sud o est).
+
+E’ possibile scegliere la difficoltà: 
+-La modalità facile prevede una generazione pseudo-casuale da parte del computer di coordinate su cui sparare. Le caselle già colpite non vengono prese in considerazione. In questa modalità la percentuale di caselle colpite sui tiri totali 20% (una nave colpita ogni 5).
+-La modalità intermedia prevede che il computer non spari sulle caselle adiacenti a navi già colpite. La percentuale colpite/totali è del 26% (una nave colpita ogni 4 tiri).
+-La modalità difficile dà la priorità a colpire intorno a pezzi di navi già colpiti ma non affondati. Nel caso in cui non ci fossero l’attacco funziona come per la modalità intermedia. La percentuale colpite/totali è del 30% (una nave colpita ogni 3 tiri).
+Le percentuali sono state calcolate su tre campioni di 100000 partite.
+
+Si può scegliere chi gioca per primo sia manualmente che lanciando una monetina (ricorda che chi gioca per primo è più avvantaggiato!)
+
+Sullo schermo verrano visualizzate due griglie: nella prima a sinistra vedi la tua matrice. Le navi non ancora colpite sono indicate con 1, 2 o 3, a seconda della dimensione. Quando vengono colpite, si assegna rispettivamente il carattere a, b, c sia che siano colpite in parte o completamente affondate. 
+La griglia di destra indica la matrice del tuo avversario (il computer). Lì puoi vedere le tue mosse fino ad ora. 
+
+Per colpire una casella si deve inserire la lettera della riga e il numero della colonna, con uno spazio nel mezzo, e premere invio.
+
+Abbiamo condizioni periodiche di bordo, ovvero il primo elemento e l’ultimo di ogni riga/colonna sono adiacenti (effetto pac-man).
+
+Per fare un esempio: questo è cosa vedi dopo che hai inserito una coordinata, con una griglia 10x10.
+
+
+
+
+
+
+Hai colpito in ( A, 7 ):Colpita nave THREE
+Il computer ha colpito in ( G, 4 ):Acqua
+
+La tua griglia:                              La griglia del tuo avversario:
+
+/   0  1  2  3  4  5  6  7  8  9            /  0  1  2  3  4  5  6  7  8  9 
+    -  -  -  -  -  -  -  -  -  -               -  -  -  -  -  -  -  -  -  -
+A  |.  .  .  .  .  .  .  .  .  .            A |.  .  .  .  .  .  .  c  .  .  
+B  |.  .  .  3  3  3  .  .  .  .            B |.  .  .  .  .  .  .  .  .  .  
+C  |3  .  .  .  .  .  .  .  3  3            C |.  .  .  .  .  .  .  .  .  .  
+D  |.  .  .  .  .  .  .  .  .  .            D |.  .  .  .  .  .  .  .  .  .  
+E  |.  .  .  .  .  1  .  .  .  .            E |.  .  .  .  .  .  .  .  .  .  
+F  |3  .  .  1  .  .  .  .  3  3            F |.  .  .  .  .  .  .  .  .  .  
+G  |.  .  .  .  X  .  .  .  .  .            G |.  .  .  .  .  .  .  .  .  .  
+H  |3  .  .  .  .  2  .  .  .  .            H |.  .  .  .  .  .  .  .  .  .  
+I  |3  .  2  2  .  2  .  .  .  .            I |.  .  .  .  .  .  .  .  .  .  
+J  |3  .  .  .  .  .  .  2  2  .            J |.  .  .  .  .  .  .  .  .  .  
+
+Hai ancora 9 navi                            Il computer ha ancora 9 navi.
+
+
+
+
+Come puoi vedere, le tue navi da tre nella riga C e nella riga F utilizzano l’effetto pac-man.
+La stessa configurazione dopo 5 mosse:
+
+
+
+
+
+
+
+Hai colpito in ( E, 2 ):Acqua
+Il computer ha colpito in ( E, 3 ):Acqua
+
+La tua griglia:                              La griglia del tuo avversario:
+
+/   0  1  2  3  4  5  6  7  8  9            /  0  1  2  3  4  5  6  7  8  9 
+    -  -  -  -  -  -  -  -  -  -               -  -  -  -  -  -  -  -  -  -
+A  |.  .  .  .  .  .  .  .  .  .            A |.  .  .  .  .  .  .  c  .  c  
+B  |.  .  .  3  3  3  X  .  .  .            B |.  X  .  .  .  .  X  .  .  .  
+C  |3  .  .  .  .  .  .  .  3  3            C |.  .  .  .  .  .  .  .  .  .  
+D  |.  .  .  .  .  .  .  .  .  .            D |.  .  .  .  .  .  .  .  .  .  
+E  |.  .  .  X  .  1  .  .  .  .            E |.  .  X  .  .  .  .  .  .  .  
+F  |3  .  .  a  .  .  .  .  3  3            F |.  .  .  .  .  .  .  .  .  .  
+G  |.  .  .  .  X  X  X  .  .  .            G |.  .  .  .  .  .  .  .  .  .  
+H  |3  .  .  .  .  2  .  .  .  .            H |.  .  .  .  .  .  .  .  .  .  
+I  |3  .  2  2  .  2  .  .  .  .            I |.  .  .  .  .  .  .  .  .  .  
+J  |3  .  .  .  .  .  .  2  2  .            J |.  .  .  .  .  .  X  .  .  .  
+
+Hai ancora 8 navi                            Il computer ha ancora 9 navi.
+
+
+Qua il computer ha affondato una tua nave da uno (F, 3), mentre tu sei su una buona strada per affondare la nave da tre posizionata nella riga A.
+
+
+
+
+
+
+Il gioco finisce quando tutte le navi sono completamente affondate.
+
+Spero non ci siano altre domande… Buon divertimento!
+
+
+
+
+
